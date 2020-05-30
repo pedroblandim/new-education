@@ -12,14 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Configure Django App for Heroku.
-import django_heroku
-django_heroku.settings(locals())
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,9 +23,9 @@ django_heroku.settings(locals())
 SECRET_KEY = '91%8(@n$uya#c!rtp*z$oz!txwifok^wc5962o%3=s-f=^-xwy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['new-education.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -155,4 +149,3 @@ LOGIN_URL ='/account/login/' # url que redireciona um acesso de um usuario não 
 CRISPY_TEMPLATE_PACK= 'bootstrap4' # ajuda com o bootstrap nos forms
 
 # AUTHENTICATION_BACKENDS = ['site_login.custom_backends.EmailBackend'] # autenticar pelo email
-
