@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for arv in arvores %}
+<div class="container mt-5 mr-2 ml-2" style="border-radius: 10px; background-color: #f8f8f8;border:black 1px solid; max-width: 200px; min-height: 100px;display:inline-block;">
+    <div class="row">
+        <div class="col-md-10 m-auto" style>
+            <p><a href = "{% url 'blog:teste' arv.id arv.prim_tela.id %}" style="text-decoration: none;cursor: pointer;"> Árvore {{arv.nome}}<br>id : {{arv.id}}</a> </p>
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

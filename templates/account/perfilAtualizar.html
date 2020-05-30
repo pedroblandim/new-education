@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Perfil de {{request.username}}{% endblock %}
+{% block content %}
+    <div class="container">
+        <form action="/account/perfil/atualizar" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Alterar sua conta</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <input class="btn btn-primary" type="submit" value="Alterar">
+            <a href="/account/perfil/" class="btn btn-secondary">Voltar</a>
+        </form>
+    </div>
+{% endblock %}

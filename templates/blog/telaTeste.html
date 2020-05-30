@@ -1,0 +1,65 @@
+{% extends 'base_arvore.html' %}
+{% load static %}
+
+<link href="{% static 'js/app.js' %}">
+
+{% block formulario %}
+
+{% if tela.video %}
+<div class='video'>
+    <iframe max-width="1732" max-height="722" src={{url_tela}} frameborder="1" allow=" autoplay; encrypted-media; gyroscope; picture-in-picture">
+    </iframe>
+</div>
+
+
+{% elif tela.imagem %}
+<div class="text-center">
+    <img src="{{tela.imagem.url}}" class="rounded mt-4" style="width:300px; height:280px;" alt="...">
+</div>
+
+{% elif tela.texto %}
+<div class="text-center">
+    <p class="mt-4">{{tela.texto}}</p>
+</div>
+
+{% endif %}
+
+
+<form action="{% url 'blog:respostaTeste' tela.id %}" method="POST" class="form-tela">
+    {% csrf_token %}
+
+    <hr>
+
+    {% if error_message %}
+    <p class="alert alert-danger mb-2" style="display:inline-block; max-width:500px;">
+        <strong>{{ error_message }}</strong>
+    
+    </p> 
+    {% endif %}
+
+    <h1 class="text=-center mb-3 ">{{ tela.question.texto }}</h1>
+
+    {% for escolha in escolhas %}
+        <div class="form-check tela" > 
+            <input 
+            type="radio"
+            name="escolha"
+            class="form-check-input"
+            id="escolha{{ forloop.counter }}"
+            value="{{ escolha.id }}"
+            />
+            <label for="escolha{{ forloop.counter }}"><div class='botao-tela'>{{escolha.nome}}</div></label>
+        </div>
+    {% endfor %}
+
+    <input type="submit" value="Responder" class="btn btn-primary btn-lg btn-block mt-4 mb-4"/>
+    
+</form>
+
+<!-- <script type="text/javascript">
+    window.history.forward()
+
+</script> -->
+
+{% endblock %}
+

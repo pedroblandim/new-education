@@ -1,0 +1,260 @@
+/* VARIAVEIS */
+$preto: #241f20;
+$pretohover: #464142;
+$verde: #4ad893;
+$verdehover: #93feca;
+$amarelo: #fef900;
+$branco: #eee;
+
+/* CONFIGURACOES GERAIS */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $branco;
+  color: $preto;
+  font-family: sans-serif, helvetica;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* FOOTER */
+.Footer {
+  font-size: 1.3rem;
+  text-align: center;
+  background: $preto;
+  color: $branco;
+  padding: 25px 0;
+}
+
+/* HEADER */
+header {
+  background-color: $preto;
+  color: $branco;
+  padding: 1.5vh 0;
+
+  img {
+    height: 3rem;
+    cursor: pointer;
+  }
+  .login {
+    background-color: $verde;
+    padding-left: 40px;
+    text-align: center;
+    color: $preto;
+    border-radius: 60px;
+    padding: 8px 40px;
+    transition: 400ms background-color ease-in-out;
+  }
+
+  .login:hover {
+    background-color: $verdehover;
+    color: $preto;
+  }
+
+  .grid-navbar {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .logo {
+    align-self: center;
+    justify-self: left;
+  }
+
+  .hamburguer {
+    display: none;
+    font-size: 2.2rem;
+  }
+
+  ul {
+    align-self: center;
+    justify-self: right;
+  }
+
+  li {
+    display: inline;
+    margin-right: 55px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 400ms color;
+    color: $branco;
+  }
+  li:hover {
+    color: $verde;
+  }
+}
+
+/* MEDIA QUERIES HEADER */
+@media screen and (max-width: 865px) {
+  header {
+    .hamburguer {
+      display: block;
+      margin: 1px;
+      align-self: center;
+      justify-self: right;
+    }
+    ul {
+      display: none;
+    }
+    .logo {
+      align-self: center;
+      justify-self: left;
+    }
+    .grid-navbar {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+/* PAGINA INICIAL */
+.grid-pagina-inicial {
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.PaginaInicial {
+  animation-name: fadeIn;
+  animation-duration: 700ms;
+  transition-timing-function: ease;
+  height: 100%;
+
+  section {
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  .grid-pagina-inicial p {
+    background: #ccc;
+    padding: 30px;
+  }
+}
+
+/* LOGIN */
+
+.Login {
+  animation-name: fadeIn;
+  animation-duration: 700ms;
+  transition-timing-function: ease;
+  text-align: center;
+  /* height: 75vh;*/
+
+  input {
+    font-size: 20px;
+    margin: 10px 0;
+    border-radius: 35px;
+    background: none;
+    padding: 10px;
+    border: $preto 1px solid;
+    text-align: center;
+    width: 35%;
+    outline: none;
+    transition: width 250ms ease-in-out, border 250ms ease-in-out;
+  }
+
+  input:hover,
+  input:focus {
+    color: $preto;
+    width: 45%;
+    border: $verde 1px solid;
+  }
+
+  button {
+    margin: 10px 0;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: helvetica;
+    width: 200px;
+    border-radius: 100px;
+    border: none;
+  }
+
+  .login {
+    color: $preto;
+    background-color: $verde;
+    width: 15%;
+    transition: 300ms background-color ease-in-out;
+    margin-right: 20px;
+  }
+
+  .login:hover {
+    background-color: $verdehover;
+  }
+
+  .criar_conta {
+    color: $branco;
+    background-color: $preto;
+    width: 15%;
+    transition: 300ms background-color ease-in-out;
+    margin-left: 20px;
+  }
+
+  .criar_conta:hover {
+    background-color: $pretohover;
+  }
+}
+
+/* MEDIA QUERIES LOGIN */
+@media screen and (max-width: 865px) {
+  .Login {
+    button {
+      display: block;
+      text-align: center;
+    }
+
+    .criar_conta {
+      margin: 15px auto;
+      width: 35%;
+    }
+
+    .login {
+      margin: 15px auto;
+      width: 35%;
+    }
+
+    input {
+      width: 50%;
+    }
+
+    input:hover,
+    input:hover {
+      width: 60%;
+    }
+  }
+}
+
+/* ANIMACOES */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

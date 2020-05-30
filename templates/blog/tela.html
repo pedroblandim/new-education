@@ -1,0 +1,96 @@
+{% extends "base_arvore.html" %}
+{% load static %}
+
+<link href="{% static 'js/app.js' %}">
+
+{% block formulario %}
+
+{% if tela.video %}
+<div class='video'>
+    <iframe max-width="1732" max-height="722" src={{url_tela}} frameborder="1" allow=" autoplay; encrypted-media; gyroscope; picture-in-picture">
+    </iframe>
+</div>
+
+
+{% elif tela.imagem %}
+<div class="text-center">
+    <img src="{{tela.imagem.url}}" class="rounded mt-4" style="width:300px; height:280px;" alt="...">
+</div>
+
+{% elif tela.texto %}
+<div class="text-center">
+    <p class="mt-4">{{tela.texto}}</p>
+</div>
+
+{% endif %}
+
+
+<form action="{% url 'blog:resposta' %}" method="POST" class="form-tela" id="form-tela" onsubmit="countTime()" >
+    {% csrf_token %}
+
+    <hr>
+    
+    {% if error_message %}
+    <p class="alert alert-danger mb-2" style="display:inline-block; max-width:500px;">
+        <strong>{{ error_message }}</strong>
+    
+    </p>
+
+
+    {% endif %}
+    
+
+    <h1 class="text=-center mb-3 ">{{ tela.question.texto }}</h1>
+
+    {% for escolha in escolhas %}
+        <div class="form-check tela" > 
+            <input 
+            type="radio"
+            name="escolha"
+            class="form-check-input"
+            id="escolha{{ forloop.counter }}"
+            value="{{ escolha.id }}"
+            />
+            <label for="escolha{{ forloop.counter }}"><div class='botao-tela'>{{escolha.nome}}</div></label>
+        </div>
+    {% endfor %}
+    <input
+    type="number"
+    name="ini_tempo"
+    id="ini_tempo{{ tela_num }}"
+    value=-1
+    hidden
+    />
+    <input
+    type="number"
+    name="fim_tempo"
+    id="fim_tempo{{ tela_num }}"
+    value=-1
+    hidden
+    />
+
+    <input type="submit" value="Responder" class="btn btn-primary btn-lg btn-block mt-4 mb-4" id="subBtn" />
+    
+</form>
+
+</form>
+
+<script type="text/javascript">
+    // só seta a variável ini_tempo uma vez 
+    if (sessionStorage.getItem("ini_tempo{{ tela_num }}") == null){
+        const ini_tempo = new Date()
+        sessionStorage.setItem("ini_tempo{{ tela_num }}", ini_tempo.getTime())
+        document.getElementById("ini_tempo{{ tela_num }}").value = ini_tempo.getTime()
+    }
+    else{
+        document.getElementById("ini_tempo{{ tela_num }}").value = sessionStorage.getItem("ini_tempo{{ tela_num }}")
+    }
+
+    function countTime(e){
+        const fim_tempo = new Date()
+        document.getElementById("fim_tempo{{ tela_num }}").value = fim_tempo.getTime()
+    }
+
+</script>
+
+{% endblock %}

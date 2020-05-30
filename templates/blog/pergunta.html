@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block formulario %}
+
+<h1 class="text=-center mb-3 mt-4">{{ pergunta.pergunta }}</h1>
+
+{% if error_message %}
+<p class="alert alert-danger mb-2" style="display:inline-block; max-width:500px;">
+    <strong>{{ error_message }}</strong>
+
+</p> 
+{% endif %}
+
+<form action="{% url 'blog:resposta' formulario.id pergunta_num %}" method="POST" >
+    {% csrf_token %}
+    {% for alt in pergunta.alternativa_set.all %}
+        {% if alt in user.usuario.alternativas.all %}
+        <div class="form-check" > 
+            <input 
+            type="radio"
+            name="alternativa"
+            class="form-check-input"
+            id="alternativa{{ forloop.counter }}"
+            value="{{ alt.id }}"
+            checked
+            />
+            <label for="alternativa{{ forloop.counter }}">{{alt.texto}}</label>
+        </div>
+        {% else %}
+        <div class="form-check" > 
+            <input 
+            type="radio"
+            name="alternativa"
+            class="form-check-input"
+            id="alternativa{{ forloop.counter }}"
+            value="{{ alt.id }}"
+            />
+            <label for="alternativa{{ forloop.counter }}">{{alt.texto}}</label>
+        </div>
+        {% endif %}
+
+    {% endfor %}
+    
+    <small class="text-muted" style="float: right;">
+        {{pergunta_num|add:1}} de {{num_de_perguntas}}
+    </small>
+
+    <input type="submit" value="Responder" class="btn btn-primary btn-lg btn-block mt-4 mb-4"/>
+</form>
+{% if pergunta_num == 0 %}
+    <a href="{% url 'blog:formulario' formulario.id %}" class="mb-4 btn btn-secondary">Voltar</a>
+    
+{% else %}
+    <a href="{% url 'blog:pergunta' formulario.id pergunta_num|add:'-1' %}" class="mb-4 btn btn-secondary">Voltar</a>
+
+    
+{% endif %}
+
+{% endblock %}

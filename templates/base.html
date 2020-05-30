@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+	
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+	<link rel="icon" href="{% static 'media/pratica_de_lembrar_icone.png' %}" />
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+	/>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	/>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<meta
+		name="viewport"
+		content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+	/>
+	<!--
+		manifest.json provides metadata used when your web app is installed on a
+		user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+	-->
+	<!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
+	<!--
+		Notice the use of %PUBLIC_URL% in the tags above.
+	It will be replaced with the URL of the `public` folder during the build.
+		Only files inside the `public` folder can be referenced from the HTML.
+	
+		Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+		work correctly both with client-side routing and a non-root public URL.
+		Learn how to configure a non-root public URL by running `npm run build`.
+	-->
+
+	<title>Prática de Lembrar</title>
+</head>
+<body>
+	{% include 'navbar.html' %}
+
+		<!-- Messagem indicando que o usuário foi criado, só aparece quando o usuário acabou de se registrar -->
+		{% if messages %}
+			{% for message in messages %}
+					<!-- <div class="alert alert-{{message.tags}}">
+						{{ message }}
+					</div> -->
+					<div style='text-align: center;'>
+						<p class="alert alert-{{message.tags}} mb-2 mt-2" style="display:inline-block; max-width:70%;">
+							<strong>{{ message }}</strong>
+						</p>
+					</div>
+			{% endfor %}
+		{% endif %}
+
+
+    <div class="row" style="width: 100vw;">
+				<!-- {% if user.is_authenticated %}
+					<p class="logged-in-p">
+						Olá {{ user.username }} seja bem vindo, o que deseja fazer hoje? 
+						<span class="sair"><a href="{% url 'account:logout' %}">Sair</a></span>
+					</p>
+				{% endif %} -->
+		
+		<div class="container mb-3" style="padding-bottom: 50px;">
+        	{% block content %}
+			{% endblock %}
+			
+		</div>
+	</div>
+    <div class="container" style="border-radius: 10px; background-color: #eee; box-shadow: 10px; box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.842); max-width: 500px;">
+        <div class="row">
+            <div class="col-md-10 m-auto" style>
+                {% block formulario %} {% endblock %}
+            </div>
+        </div>
+    </div>
+
+	<div class="footer">
+		<footer >Prática de Lembrar &copy; 2020</footer>
+	</div>
+
+	<!-- JS com Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+	<!-- Limpar sessionStorage para não causar erro na conta dos tempos -->
+	<!-- sessionStorage só limpa quando a aba é fechada ou com a função clear -->
+    <script type="text/javascript">
+        sessionStorage.clear()
+    </script>
+	
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.usuario.form_atual %}
+    <div class="container mt-4" style="width:600px;">
+    <div class="card mb-3 mt-4">
+        <div class="card-body">
+            <h1 class="lead">Parece que você já está respondendo a um questionário.</h1>
+            <p>Deseja voltar a respondê-lo?</p>
+        </div>
+        <div><a  href="{% url 'blog:pergunta' user.usuario.form_atual.id ultima_perg%}" class="btn btn-primary btn-lg  ml-4 mb-4">Responder</a></div>
+    </div>
+    </div>
+
+
+    {% else %}
+
+
+        <h1 class="text-center mb-3">Questionários disponíveis:</h1>
+        {% if forms_disponiveis %}
+            {% for formulario in forms_disponiveis %}
+
+                {% if formulario in forms_respondidos %}
+                {% else %}
+
+                <div class="card mb-3 text-center">
+                    <div class="card-body">
+                        <a href="{% url 'blog:formulario' formulario.id %}">{{ formulario.nome }}</a>
+                        <p class="lead">{{ formulario.descricao }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+    
+        {% else %}
+            <p>Nenhum formulário disponível</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

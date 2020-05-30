@@ -1,0 +1,69 @@
+{% load static %}
+
+<!-- <header>
+  <div class="cont grid-nav"; style="vertical-align: auto;">
+    <ul>
+      <a href="/" class="logo">
+        <img src= "{% static 'media/pratica_de_lembrar.png' %}" width="81" height="50" alt="Prática de Lembrar">
+      </a>
+      <a style="text-decoration: none;" href="{% url 'blog:about' %}"><li> Quem Somos</li></a>
+      {% if user.is_authenticated %}
+
+      {% endif %}
+  </ul>
+    <ul>
+      {% if not user.is_authenticated %}
+        <a href="{% url 'account:register' %}"><li>Registrar</li></a>
+        <a href="{% url 'account:login' %}"><li class="login">Entrar</li></a>
+      {% else %}
+          <a href="{% url 'account:perfilVisualizar' %}"><li>Perfil de {{user.username}}</li></a>
+          <a href="{% url 'account:logout' %}"><li>Sair</li></a>
+      {% endif %}
+    </ul>
+    <p class="hamburguer">&#9776;</p>
+  </div>
+</header> -->
+
+
+
+<div style="background-color: #343a40;">
+<div style="max-width: 1200px;margin:auto; background-color: #343a40;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <a class="navbar-brand" href="/" >
+        <img src= "{% static 'media/pratica_de_lembrar_mod.png' %}" width="81" height="50" alt="Prática de Lembrar">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link" href="{% url 'blog:home' %}">Página Inicial</a>
+            <a class="nav-item nav-link" href="{% url 'blog:about' %}">Quem somos</a>
+            {% if user.is_authenticated and not user.is_superuser%}
+              <a class="nav-item nav-link" href="{% url 'blog:iniciar'%}">Questionário</a>
+             
+            {% endif %}
+
+        </div>
+        <div class="navbar-nav">
+          {% if user.is_authenticated and not user.is_superuser%}
+            <a class="nav-item nav-link" href="{% url 'account:perfilVisualizar' %}">Perfil de {{user.username}}</a>
+          {% endif %}
+          {% if user.is_superuser %}
+            <a class="nav-item nav-link" href="{% url 'blog:testar' %}">Testar Questionários</a>
+          {% endif %}
+          {% if not user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'account:register' %}">Registrar</a>
+            <a class="nav-item nav-link" href="{% url 'account:login' %}">Entrar</a>
+          {% else %}
+            <a class="nav-item nav-link" href="{% url 'account:logout' %}">Sair</a>
+          {% endif %}
+        </div>
+      
+    </div> 
+
+  </nav>
+</div>
+</div>

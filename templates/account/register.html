@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Crie sua conta{% endblock %}
+{% block content %}
+    <div class="container">
+        <form action="." method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Crie sua conta</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+
+            </fieldset>
+            <input class="btn btn-primary" type="submit" value="Registrar">
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Já possui uma conta?<a class="ml-2" href="account/login">Login</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}
